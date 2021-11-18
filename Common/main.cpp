@@ -5,6 +5,6 @@ int WINAPI WinMain( __in HINSTANCE hInstance, __in_opt HINSTANCE hPrevInstance, 
 int main()
 #endif
 {
-	CLauncher app;
-	return app.Execute();
+    CLauncher app;
+    return app.Execute();
 }
