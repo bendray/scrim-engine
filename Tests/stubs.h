@@ -9,7 +9,7 @@ public:
     InputControllerStub() = default;
     ~InputControllerStub() = default;
     //IInputController
-    bool Load(IInputModel* pInput, IRenderWindow* pOutput, bool exclusive)
+    int Load(IInputModel* pInput, IRenderWindow* pOutput, bool exclusive)
     {
             SetModel(pInput);
             return true;
