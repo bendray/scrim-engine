@@ -3,14 +3,14 @@
 #include <ScrimEngine.hpp>
 
 template<int X, int Y, int PK, int RK>
-class InputControllerStub : public IInputController
+class InputControllerStub : public Scrim::IInputController
 {
 public:
     InputControllerStub() = default;
     ~InputControllerStub() = default;
     InputControllerStub(const InputControllerStub&) = default;
     //IInputController
-    int Load(IInputModel* pInput, IRenderWindow* pOutput, bool exclusive)
+    int Load(Scrim::IInputModel* pInput, Scrim::IRenderWindow* pOutput, bool exclusive)
     {
             SetModel(pInput);
             return true;
@@ -19,10 +19,10 @@ public:
     {
             SetKeyState(m_pkey, true);
             SetKeyState(m_rkey, false);
-            SetMouseState(MouseState{ 3, m_x, m_y }); // pressed both
-            SetMouseState(MouseState{ 1, m_x, m_y }); // release second
+            SetMouseState(Scrim::MouseState{ 3, m_x, m_y }); // pressed both
+            SetMouseState(Scrim::MouseState{ 1, m_x, m_y }); // release second
     }
-    void OnResize(IRenderWindow* pWnd){}
+    void OnResize(Scrim::IRenderWindow* pWnd){}
     //~IInputController
 private:
     const int m_x = X; 

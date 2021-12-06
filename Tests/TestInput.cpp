@@ -23,8 +23,8 @@ public:
     void TearDown()
     {
     }
-    std::unique_ptr<IInput> input = nullptr;
-    std::unique_ptr<IInputController> ic = nullptr;
+    std::unique_ptr<Scrim::IInput> input = nullptr;
+    std::unique_ptr<Scrim::IInputController> ic = nullptr;
 };
 
 TEST_F(CInputTest, TestInputCase)
