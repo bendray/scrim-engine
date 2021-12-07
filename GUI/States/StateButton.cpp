@@ -63,7 +63,6 @@ bool StateButton::keyPressed(const EventObject& event)
 bool StateButton::keyReleased(const EventObject& event)
 { 
     return true;
-
 }
 
 bool StateButton::mouseMoved(const EventObject& event)
