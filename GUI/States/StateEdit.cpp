@@ -70,71 +70,11 @@ void StateEdit::OnResize(IRenderWindow* wnd)
 
 bool StateEdit::keyPressed(const EventObject& evt)
 { 
-/*        
-    switch (arg.key)
-    {
-    case OIS::KC_LEFT:
-        break;
-    case OIS::KC_RIGHT:
-        break;
-    case OIS::KC_UP:
-        break;
-    case OIS::KC_DOWN:
-        break;
-    case OIS::KC_NUMPAD2:
-        break;
-    case OIS::KC_NUMPAD8:
-        break;
-    case OIS::KC_NUMPAD4:
-        break;
-    case OIS::KC_NUMPAD6:
-        break;
-    case OIS::KC_DELETE:
-        break;
-    case OIS::KC_SPACE:
-        break;
-    }
-*/    
     return true;
 }
 
 bool StateEdit::keyReleased(const EventObject& evt)
 { 
-    /*    
-    vec2 curPos = g_pGUI->GetCursorPos();
-    switch(arg.key){
-    case OIS::KC_LEFT:
-        curPos.x = curPos.x-12.0f;
-        g_pGUI->SetCursorPos(curPos.x, curPos.y); 
-        //internal cursor pos
-        m_pCursorSprite->GetSprite()->SetPos(curPos.x, curPos.y, 0);
-        //...
-        break;
-    case OIS::KC_RIGHT:
-        curPos.x = curPos.x+12.0f;
-        g_pGUI->SetCursorPos(curPos.x, curPos.y); 
-        //internal cursor pos
-        m_pCursorSprite->GetSprite()->SetPos(curPos.x, curPos.y, 0);
-        //...
-        break;
-    case OIS::KC_UP:
-        break;
-    case OIS::KC_DOWN:
-        break;
-    case OIS::KC_NUMPAD2:
-        break;
-    case OIS::KC_NUMPAD8:
-        break;
-    case OIS::KC_NUMPAD4:
-        break;
-    case OIS::KC_NUMPAD6:
-        break;
-    case OIS::KC_SPACE:
-        break;
-    case OIS::KC_ESCAPE:
-        break;
-    }
-    */
     return true;
 }
 
@@ -150,16 +90,5 @@ bool StateEdit::mousePressed(const EventObject& evt)
 
 bool StateEdit::mouseReleased(const EventObject& evt)
 {
-    /*
-    ISprite2D* pObj = GetCanvas()->Pick((float)arg.state.X.abs, (float)arg.state.Y.abs);
-    if(pObj != NULL) //todo: get label
-    {
-        g_pGUI->SetCursorPos(pObj->GetPosX()+6.0f, pObj->GetPosY()); //get label char edge
-        //internal cursor pos
-        vec2 curPos = g_pGUI->GetCursorPos();
-        m_pCursorSprite->GetSprite()->SetPos(curPos.x, curPos.y, 0);
-        //...
-    }
-    */
     return true;
 }

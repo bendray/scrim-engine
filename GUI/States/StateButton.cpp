@@ -47,69 +47,21 @@ void StateButton::Draw()
 
 void StateButton::ProcessCmd(const char* cmd, void* params)
 {
+
 }
 
 void StateButton::OnResize(IRenderWindow* wnd)
 {
+
 }
 
 bool StateButton::keyPressed(const EventObject& event)
 { 
-    /*
-    switch (arg.key)
-    {
-    case OIS::KC_LEFT:
-        break;
-    case OIS::KC_RIGHT:
-        break;
-    case OIS::KC_UP:
-        break;
-    case OIS::KC_DOWN:
-        break;
-    case OIS::KC_NUMPAD2:
-        break;
-    case OIS::KC_NUMPAD8:
-        break;
-    case OIS::KC_NUMPAD4:
-        break;
-    case OIS::KC_NUMPAD6:
-        break;
-    case OIS::KC_DELETE:
-        break;
-    case OIS::KC_SPACE:
-        break;
-    }
-    */
     return true;
-
 }
 
 bool StateButton::keyReleased(const EventObject& event)
 { 
-    /*
-    switch(arg.key){
-    case OIS::KC_LEFT:
-        break;
-    case OIS::KC_RIGHT:
-        break;
-    case OIS::KC_UP:
-        break;
-    case OIS::KC_DOWN:
-        break;
-    case OIS::KC_NUMPAD2:
-        break;
-    case OIS::KC_NUMPAD8:
-        break;
-    case OIS::KC_NUMPAD4:
-        break;
-    case OIS::KC_NUMPAD6:
-        break;
-    case OIS::KC_SPACE:
-        break;
-    case OIS::KC_ESCAPE:
-        break;
-    }
-    */
     return true;
 
 }
