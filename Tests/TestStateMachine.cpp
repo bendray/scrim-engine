@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "stubs.h"
+#include "stubs.hpp"
 
 #include "BaseState.hpp"
 //TODO: mock
@@ -19,7 +19,9 @@ public:
     virtual ~TestStateWithEvents()
     {
     }
-	using EventObject = Scrim::EventObject;
+
+    using EventObject = Scrim::EventObject;
+
     void TestPressCallback(EventObject obj)
     {
         onPressFlag = !onPressFlag;

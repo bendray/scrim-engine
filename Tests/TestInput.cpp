@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "stubs.h"
+#include "stubs.hpp"
 
 constexpr int input_mouse_x = 42;
 constexpr int input_mouse_y = 88;
