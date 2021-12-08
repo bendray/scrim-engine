@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.1)
+file (GLOB ENGINE_HEADERS	"Include/*.hpp")
+source_group("Engine" FILES ${ENGINE_HEADERS})
+set_source_files_properties(${ENGINE_HEADERS} PROPERTIES HEADER_FILE_ONLY TRUE)
+add_custom_target(Engine SOURCES ${ENGINE_HEADERS})

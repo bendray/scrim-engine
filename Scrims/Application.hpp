@@ -4,10 +4,14 @@
 #include <Scrim.hpp>
 #include <GUI.hpp>
 
-#ifdef GAMELIBRARY_EXPORTS
-#define GAME_API __declspec(dllexport)
+#if defined(_WIN32) | defined(_WIN64)
+  #ifdef GAMELIBRARY_EXPORTS
+    #define GAME_API __declspec(dllexport)
+  #else
+    #define GAME_API __declspec(dllimport)
+  #endif
 #else
-#define GAME_API __declspec(dllimport)
+  #define GAME_API
 #endif
 
 class CLauncher;

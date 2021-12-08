@@ -8,10 +8,12 @@ using namespace Scrim;
 StateScene::StateScene(const char* name, ICanvas* pCanvas)
     : CBaseState(name, pCanvas) 
 {
+	on(this, &StateScene::onKeyPressed, Application::GetStateManager(), Scrim::KEY_PRESS);
 }
 
 StateScene::~StateScene()
 {
+	off(this, &StateScene::onKeyPressed, Application::GetStateManager());
 }
 
 void StateScene::OnEnter()
@@ -42,4 +44,10 @@ void StateScene::ProcessCmd(const char* cmd, void* params)
 
 void StateScene::OnResize(IRenderWindow* wnd)
 {
+}
+
+void StateScene::onKeyPressed(Scrim::EventObject event)
+{
+	auto arg = std::get<Scrim::KeyboardEventType>(event);
+	Debug::Log() << arg.keyId << std::endl;
 }

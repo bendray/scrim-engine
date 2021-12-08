@@ -15,5 +15,6 @@ public:
     void ProcessCmd(const char* cmd, void* params);
     void OnResize(Scrim::IRenderWindow* wnd);
 
+    void onKeyPressed(Scrim::EventObject evt);
 };
 

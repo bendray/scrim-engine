@@ -29,4 +29,5 @@
 
 /Audio
 /build
-/ThirdParty
+/Dependencies/build
+/ThirdParty/gtest

@@ -5,7 +5,7 @@
 #include "IState.hpp"
 #include "StateCallback.hpp"
 
-#include <nv_math\nv_math.h>
+#include <nv_math/nv_math.h>
 
 namespace Scrim
 {
