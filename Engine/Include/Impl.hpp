@@ -6,4 +6,5 @@ namespace Scrim
     class StateManagerImpl;
     class AudioManagerImpl;
     class CanvasImpl;
+    class RenderImpl;
 }

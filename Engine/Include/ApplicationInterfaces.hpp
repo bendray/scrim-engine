@@ -6,23 +6,28 @@ namespace Scrim
 {
     class Render : public IRender 
     {
-    public:
-        Render() = default;
-        virtual ~Render()= default;
-
-        int Load(IRenderWindow*) override;
-        void ClearTargets();
-        int BeginScene();
-        void EndScene();
-        void Present();
-        void TurnZBufferOn();
-        void TurnZBufferOff();
-        void OnResize(IRenderWindow* pWnd);
-        size_t GetDevice();
-        size_t GetDeviceContext();
-        ModeList GetDisplayModes();
     protected:
-        ModeList m_displayModes;
+        Render(const Render&) = default;
+        Render& operator=(const Render&) = default;
+    public:
+        Render();
+        ~Render();
+
+        //IRender
+        int Load(IRenderWindow*) override;
+        void ClearTargets() override;
+        int BeginScene() override;
+        void EndScene() override;
+        void Present() override;
+        void TurnZBufferOn() override;
+        void TurnZBufferOff() override;
+        void OnResize(IRenderWindow* pWnd) override;
+        //size_t GetDevice() override;
+        //size_t GetDeviceContext() override;
+        ModeList GetDisplayModes() override;
+        //~IRender
+    private:
+        RenderImpl* m_pImpl = nullptr;
     };
     class Input : public IInput
     {
@@ -56,7 +61,7 @@ namespace Scrim
         void SetControllerButtonState(ControllerButtonState&&);
         //~IInputModel
     private:
-        InputImpl* m_pImpl = nullptr;   
+        InputImpl* m_pImpl = nullptr;
     };
     class StateManager : public IStateManager
     {
@@ -107,6 +112,8 @@ namespace Scrim
         void ResumeMusic() override;
         void StopMusic() override;
         void Update() override;
+    private:
+        AudioManagerImpl* m_pImpl = nullptr;
     };
 
 }

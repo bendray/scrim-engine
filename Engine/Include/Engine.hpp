@@ -24,7 +24,7 @@ namespace Scrim
         void OnResize(IRenderWindow* pWnd) override;
         //~ICanvas
     private:
-        CanvasImpl* pImpl;
+        CanvasImpl* m_pImpl;
     };
 }
 
