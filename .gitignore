@@ -31,3 +31,5 @@
 /build
 /Dependencies/build
 /ThirdParty/gtest
+
+*.swp
