@@ -7,7 +7,6 @@
 #include <Debug.hpp>
 
 #include <ctime>
-#include <iomanip>
 
 #if defined(_WIN32) || defined(_WIN64)
 #include "../Win/Launcher/RenderWindow.hpp"
