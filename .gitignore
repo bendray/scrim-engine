@@ -31,5 +31,6 @@
 /build
 /Dependencies/build
 /ThirdParty/gtest
+/ThirdParty/gmock
 
 *.swp

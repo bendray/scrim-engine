@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 #include "stubs.hpp"
 
 #include "BaseState.hpp"
-//TODO: mock
+
 class TestStateWithEvents: public CBaseState
 {
 public:
@@ -15,6 +16,8 @@ public:
         once(this, &TestStateWithEvents::TestMouseMoveCallback, pSM, Scrim::MOUSE_MOVE);
         once(this, &TestStateWithEvents::TestMousePressCallback, pSM, Scrim::MOUSE_PRESS);
         once(this, &TestStateWithEvents::TestMouseReleaseCallback, pSM, Scrim::MOUSE_RELEASE);
+
+        on(this, &TestStateWithEvents::TestContinuousPressCallback, pSM, Scrim::KEY_RELEASE);
     }
     virtual ~TestStateWithEvents()
     {
@@ -22,32 +25,17 @@ public:
 
     using EventObject = Scrim::EventObject;
 
-    void TestPressCallback(EventObject obj)
-    {
-        onPressFlag = !onPressFlag;
-    }
-    void TestReleaseCallback(EventObject obj)
-    {
-        onReleaseFlag = !onReleaseFlag;
-    }
-    void TestMouseMoveCallback(EventObject obj)
-    {
-        onMouseMoveFlag = !onMouseMoveFlag;
-    }
-    void TestMousePressCallback(EventObject obj)
-    {
-        onMousePressFlag = !onMousePressFlag;
-    }
-    void TestMouseReleaseCallback(EventObject obj)
-    {
-        onMouseReleaseFlag = !onMouseReleaseFlag;
-    }
+    MOCK_METHOD1(TestPressCallback, void(EventObject obj));
 
-    bool GetPressSideEffect() { return onPressFlag; }
-    bool GetReleaseSideEffect() { return onReleaseFlag; }
-    bool GetMouseMoveSideEffect() { return onMouseMoveFlag; }
-    bool GetMousePressSideEffect() { return onMousePressFlag; }
-    bool GetMouseReleaseSideEffect() { return onMouseReleaseFlag; }
+    MOCK_METHOD1(TestReleaseCallback, void(EventObject obj));
+
+    MOCK_METHOD1(TestMouseMoveCallback, void(EventObject obj));
+
+    MOCK_METHOD1(TestMousePressCallback, void(EventObject obj));
+
+    MOCK_METHOD1(TestMouseReleaseCallback, void(EventObject obj));
+
+    MOCK_METHOD1(TestContinuousPressCallback, void(EventObject obj));
 
     void OnEnter(){}
     void OnLeave(){}
@@ -57,17 +45,12 @@ public:
     void OnResize(Scrim::IRenderWindow* pWnd){}
 private:
     Scrim::IStateManager* pStateManager = nullptr;
-    bool onPressFlag = false;
-    bool onReleaseFlag = false;
-    bool onMouseMoveFlag = false;
-    bool onMousePressFlag = false;
-    bool onMouseReleaseFlag = false;
 };
 
 class CStateEventsTest: public testing::Test
 {
 public:
-    CStateEventsTest(void) = default;
+    CStateEventsTest(void) = default; 
     ~CStateEventsTest(void) = default;
     void SetUp()
     {
@@ -75,6 +58,7 @@ public:
         sm = std::make_unique<Scrim::StateManager>();
         input->AddListener(sm.get());
         sm->AddState<TestStateWithEvents>("test", nullptr, sm.get());
+        st = static_cast<TestStateWithEvents*>(sm->GetState());
         ic = std::make_unique<InputControllerStub<42, 16, 0x1, 0x89>>();
         ic->Load(input.get(), nullptr, false);
     }
@@ -85,31 +69,22 @@ public:
     std::unique_ptr<Scrim::IInput> input = nullptr;
     std::unique_ptr<Scrim::StateManager> sm = nullptr;
     std::unique_ptr<Scrim::IInputController> ic = nullptr;
+    TestStateWithEvents* st = nullptr;
 };
-
-#define GET_SE(EvtName) static_cast<TestStateWithEvents*>(sm->GetState())->Get##EvtName##SideEffect()
 
 TEST_F(CStateEventsTest, TestStateAsInputListenerCase)
 {
     ASSERT_FALSE(input == nullptr);
     ASSERT_FALSE(sm == nullptr);
     ASSERT_FALSE(ic == nullptr);
-    EXPECT_FALSE(GET_SE(Press));
-    EXPECT_FALSE(GET_SE(Release));
-    EXPECT_FALSE(GET_SE(MouseMove));
-    EXPECT_FALSE(GET_SE(MousePress));
-    EXPECT_FALSE(GET_SE(MouseRelease));
+    ASSERT_FALSE(st == nullptr);
+    EXPECT_CALL(*st, TestPressCallback(testing::_)).Times(1);
+    EXPECT_CALL(*st, TestReleaseCallback(testing::_)).Times(1);
+    EXPECT_CALL(*st, TestMouseMoveCallback(testing::_)).Times(1);
+    EXPECT_CALL(*st, TestMousePressCallback(testing::_)).Times(1);
+    EXPECT_CALL(*st, TestMouseReleaseCallback(testing::_)).Times(1);
+    EXPECT_CALL(*st, TestContinuousPressCallback(testing::_)).Times(testing::AnyNumber());
     ic->CaptureInput();
-    EXPECT_TRUE(GET_SE(Press));
-    EXPECT_TRUE(GET_SE(Release));
-    EXPECT_TRUE(GET_SE(MouseMove));
-    EXPECT_TRUE(GET_SE(MousePress));
-    EXPECT_TRUE(GET_SE(MouseRelease));
     ic->CaptureInput();
-    EXPECT_TRUE(GET_SE(Press));
-    EXPECT_TRUE(GET_SE(Release));
-    EXPECT_TRUE(GET_SE(MouseMove));
-    EXPECT_TRUE(GET_SE(MousePress));
-    EXPECT_TRUE(GET_SE(MouseRelease));
-
+    ic->CaptureInput();
 }
